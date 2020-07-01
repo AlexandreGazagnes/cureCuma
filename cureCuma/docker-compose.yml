@@ -1,0 +1,50 @@
+version: '3.7'
+
+# networks
+networks:
+  db-net:
+  front-net:
+  back-net:
+  # monitor-net:
+  #   external:
+  #     name: monitor_net
+
+# services
+services:
+
+  # mysql db
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-cont
+    volumes:
+      - ./volumes/mysql/db_data:/var/lib/mysql
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+    # expose:
+    #   - 3306
+    ports:
+      - 65006:3306
+    networks:
+      - db-net
+    restart: always
+
+
+
+  # gui mysql client
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-cont
+    # volumes:
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+      - ./.env/dev/.env.phpmyadmin.dev
+    # expose :
+    #   - 80
+    ports:
+      - 65080:80
+    networks:
+      - front-net
+      - db-net
+    depends_on:
+      - mysql
+    restart: always
