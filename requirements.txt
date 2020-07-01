@@ -1,0 +1,18 @@
+# flask / web
+flask_bcrypt
+requests
+gunicorn
+
+# db 
+SQLAlchemy
+pymysql
+
+# test
+pytest
+black
+pylint
+autopep8
+
+# misc
+IPython
+python-dateutil
