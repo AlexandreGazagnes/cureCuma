@@ -26,7 +26,7 @@ users = Blueprint("users", __name__)
 
 @users.route("/users/ping", methods=["POST", "GET"])
 def ping():
-    """just a ping"""
+    """just a ping for  test"""
     logger.debug("called")
 
     return "pong", 200

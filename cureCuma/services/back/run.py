@@ -15,7 +15,7 @@ def main():
     """main funct"""
 
     app = create_app()
-    app.run(port=Params.port, host=Params.host)
+    app.run(port=Params.port, host="0.0.0.0")
 
 
 if __name__ == "__main__":

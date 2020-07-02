@@ -49,7 +49,7 @@ class User(Base):
 class Machnine(Base):
 
     __table__ = Table(
-        Params.machiness_tn,
+        Params.machines_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("email", String(50)),  # fent67@cuma.fr
