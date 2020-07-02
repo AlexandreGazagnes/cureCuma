@@ -29,7 +29,7 @@ from src.model import engine, Base, Session
 class User(Base):
 
     __table__ = Table(
-        Params.user_tablename,
+        Params.users_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime),  # 2020-01-01 00:00:00
@@ -49,7 +49,7 @@ class User(Base):
 class Machnine(Base):
 
     __table__ = Table(
-        Params.machine_tablename,
+        Params.machiness_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("email", String(50)),  # fent67@cuma.fr

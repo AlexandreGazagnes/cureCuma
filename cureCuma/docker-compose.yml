@@ -44,3 +44,30 @@ services:
     depends_on:
       - mysql
     restart: always
+
+
+  # api_back api
+  back:
+    build:
+      context: ./services/back
+      dockerfile: Dockerfile
+    image: api_back:v0.0.0
+    container_name: back
+    volumes:
+      - ./services/back:/app
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+      # - ./.env/dev/.env.learnybox.dev
+      # - ./.env/dev/.env.activecampaign.dev
+      - ./.env/dev/.env.back.dev
+    networks:
+      - db-net
+      - back-net
+    # expose :
+    #   - 5042
+    ports:
+      - 65040:5040
+    depends_on:
+      - mysql
+    restart: always
+
