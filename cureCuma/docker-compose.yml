@@ -5,9 +5,6 @@ networks:
   db-net:
   front-net:
   back-net:
-  # monitor-net:
-  #   external:
-  #     name: monitor_net
 
 # services
 services:
@@ -15,7 +12,7 @@ services:
   # mysql db
   mysql:
     image: mysql:5.7
-    container_name: mysql-cont
+    container_name: mysql
     volumes:
       - ./volumes/mysql/db_data:/var/lib/mysql
     env_file:
@@ -27,7 +24,6 @@ services:
     networks:
       - db-net
     restart: always
-
 
 
   # gui mysql client
