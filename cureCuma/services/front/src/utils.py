@@ -1,8 +1,13 @@
 import os
-import datetime
 import requests
+import datetime
+import secrets
 import pprint
 from pprint import pformat
+
+
+from flask import session
+
 
 # import sys
 # import subprocess
@@ -14,7 +19,9 @@ from pprint import pformat
 from params import GeneralParams as Params
 from src import logger
 
-# from src.model import Db
+
+def now():
+    return str(datetime.datetime.now())[:19]
 
 
 def setFileStruct():
@@ -32,7 +39,3 @@ def setFileStruct():
             os.mkdir(d)
 
     return 0
-
-
-def now():
-    return str(datetime.datetime.now())[:19]
