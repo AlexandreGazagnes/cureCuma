@@ -1,7 +1,8 @@
 """App configuration."""
 
 import os
-from os import environ, path
+
+# from os import environ, path
 
 # from dotenv import load_dotenv
 
@@ -16,8 +17,8 @@ class Config:
 
     # General Config
     SECRET_KEY = os.getenv("FRONT_SECRET_KEY", "azery")
-    FLASK_APP = os.getgetenv("FRONT_FLASK_APP", "front")
-    SESSION_COOKIE_NAME = os.getgetenv("SESSION_COOKIE_NAME", "cureCumaCookie")
+    FLASK_APP = os.getenv("FRONT_FLASK_APP", "front")
+    SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "cureCumaCookie")
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
 

@@ -1,0 +1,30 @@
+{% from "base/footer.html" import footer %}
+{% from "base/header.html" import header %}
+{% from "base/main.html" import main %}
+{% from "base/head.html" import head %}
+
+<html lang="en">
+
+<head>
+    {{ head() }}
+</head>
+
+
+<body>
+    <!-- header  -->
+    <header class="container border-bottom">
+        {{ header() }}
+    </header>
+
+    <!-- main  -->
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- footer  -->
+    <footer class="container border-top">
+        {{ footer() }}
+    </footer>
+</body>
+
+</html>

@@ -20,7 +20,7 @@ Flask-Scss
 flask-session
 flask-login
 gunicorn
-
+requests
 # selenium
 
 # DB

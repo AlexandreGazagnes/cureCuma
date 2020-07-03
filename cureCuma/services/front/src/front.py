@@ -30,5 +30,4 @@ def just_static():
     """just return html and css"""
 
     logger.debug("called")
-    response = "<h1>Hello World</h1> "
-    return response, 200
+    return render_template("pages/home.html")

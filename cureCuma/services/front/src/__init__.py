@@ -1,3 +1,6 @@
+import os
+import sys
+import logging
 import secrets
 from flask import Flask
 from flask import render_template, redirect, escape, request, session
@@ -12,7 +15,7 @@ from params import GeneralParams as Params
 from params import setBasicConfig
 
 
-setBasicConfig(os.getenv("SERVICE_NAME", "ipython"), Params)
+setBasicConfig(os.getenv("FRONT_SERVICE_NAME", "ipython"), Params)
 logger = logging.getLogger()
 
 from src.config import ProdConfig, DevConfig
