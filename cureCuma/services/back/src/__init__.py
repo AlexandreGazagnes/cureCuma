@@ -17,7 +17,12 @@ logger = logging.getLogger()
 
 from src.utils import setFileStruct
 from src.config import Config
-from src.model.utils import wait_sql_up, create_table_if_needed, create_table
+from src.model.utils import (
+    wait_sql_up,
+    create_table_if_needed,
+    create_table,
+    feed_if_empty,
+)
 
 # bcrypt = Bcrypt()
 
@@ -32,6 +37,7 @@ def create_app(config_class=Config):
     setFileStruct()
     wait_sql_up()
     create_table()
+    feed_if_empty()
 
     # init app
     app = Flask(__name__)
@@ -40,6 +46,7 @@ def create_app(config_class=Config):
 
     # # import routes
     from src.routes.users import users
+    from src.routes.machines import machines
 
     # from src.routes.learnybox import webdownwebdownwebdown
     # from src.routes.db import db
@@ -48,6 +55,7 @@ def create_app(config_class=Config):
 
     # # register
     app.register_blueprint(users)
+    app.register_blueprint(machines)
     # app.register_blueprint(learnybox)
     # app.register_blueprint(db)
     # app.register_blueprint(subscriber)

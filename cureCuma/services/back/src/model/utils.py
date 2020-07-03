@@ -4,6 +4,7 @@ import time
 from src import logger
 from params import GeneralParams as Params
 
+import pandas as pd
 
 from src.model.tables import *
 
@@ -107,3 +108,39 @@ def wait_sql_up(n_times=20, raiser=True):
 #     Base.metadata.drop_all(
 #         bind=engine, tables=[Transaction.__table__, Sale.__table__, Member.__table__]
 #     )
+
+
+def feed_if_empty():
+    """feed with dummy values if empty tables  """
+
+    logger.info("called")
+    create_data_if_needed("users", User)
+    create_data_if_needed("machines", Machine)
+
+
+def create_data_if_needed(filename, TableObj):
+    """feed with dummy data  """
+
+    logger.info("called")
+    # session
+    sess = Session()
+    # user / list return 0 if needed
+    result = sess.query(TableObj).all()
+    if len(result):
+        return 0
+    # read cvs
+    df = pd.read_csv(Params.data + f"src/{filename}.csv")
+    objs = [ser.to_dict() for _, ser in df.iterrows()]
+    # make Users
+    objs = [TableObj(**obj) for obj in objs]
+    # add
+    for obj in objs:
+        try:
+            sess.add(obj)
+            sess.commit()
+        except Exception as e:
+            logger.error(e)
+            sess.rollback()
+    # close sess
+    sess.close()
+    return 0

@@ -7,3 +7,5 @@ IPython
 
 gunicorn
 python-dateutil
+
+pandas
