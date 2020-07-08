@@ -17,12 +17,7 @@ logger = logging.getLogger()
 
 from src.utils import setFileStruct
 from src.config import Config
-from src.model.utils import (
-    wait_sql_up,
-    create_table_if_needed,
-    create_table,
-    feed_if_empty,
-)
+from src.model.utils import ModelUtils
 
 # bcrypt = Bcrypt()
 
@@ -35,9 +30,7 @@ def create_app(config_class=Config):
 
     # create table if needed
     setFileStruct()
-    wait_sql_up()
-    create_table()
-    feed_if_empty()
+    ModelUtils.boot()
 
     # init app
     app = Flask(__name__)
