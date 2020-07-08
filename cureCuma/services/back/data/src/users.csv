@@ -1,3 +1,6 @@
-created,email,pseudo,password,firstname,lastname,phone,admin
-2020-01-01 00:00:00,antoine@gmail.com,antoineG,azerty,antoine,gazagnes,+33643004726,0
-2020-01-01 00:00:00,gilles@gmail.com,gillesVKP,azerty,gilles,vkp,+3361233213,1
+created,email,pseudo,password,admin,status,firstname,lastname,phone,active
+2020-01-01,contact@cuma.fr,cuma,azerty,1,cuma,,,,1
+2020-01-01,gilles@gmail.com,gillesVKP,azerty,1,adherent,gilles,vkp,3361233213,1
+2020-01-01,pierre@gmail.com,pierreVKP,azerty,1,adherent,pierre,vkp,3361233213,1
+2020-01-01,antoine@gmail.com,antoineG,azerty,0,employee,antoine,gazagnes,33643004726,1
+2020-01-01,alex@gmail.com,alexandreF,azerty,0,employee,alexandre,gazagnes,33643004726,1

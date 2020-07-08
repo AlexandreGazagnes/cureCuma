@@ -28,7 +28,7 @@ from src import logger
 
 
 ####################################################
-# ROOT LEVEl
+# HUMAN
 ####################################################
 
 
@@ -59,6 +59,34 @@ class User(Base):
         return str(self.as_dict())
 
 
+####################################################
+# ORGANISATION
+####################################################
+
+
+class Cuma:
+    """a Cuma"""
+
+    pass
+
+
+class CumaUser:
+    """all user for one or more cuma """
+
+    pass
+
+
+class Company:
+    """a company """
+
+    pass
+
+
+####################################################
+# OBJECTS
+####################################################
+
+
 class Parcel(Base):
     """any crop, land or earthpeice """
 
@@ -69,7 +97,7 @@ class Parcel(Base):
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("owner", Integer, nullable=False),  # bonniere-devant
-        Column("adresse", String(50), nullable=False),  # route de bonniere
+        Column("adress", String(50), nullable=False),  # route de bonniere
         Column("postcode", String(5), nullable=False),  # 45230
         Column("town", String(50), nullable=False),  # Chatillon-colligny
         Column("subtown", String(50), nullable=False),  # boniere
@@ -106,6 +134,7 @@ class Machine(Base):
         Column("oil", Integer, nullable=False,),  # 80
         Column("kms", Integer, nullable=False,),  # tracteur
         Column("hours", Integer, nullable=False,),  # tracteur
+        Column("submodel", String(50),),  #
         Column("auth_tools", String(500),),  # tracteur
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
@@ -172,11 +201,53 @@ class Message:
 class Tool:
     """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
 
-    pass
+    __table__ = Table(
+        Params.machines_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("owner", Integer, nullable=False),  # alexCPMHK
+        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("constructor", String(50), nullable=False, default=""),  # FENT
+        Column("model", String(50), nullable=False, default=""),  # 850
+        Column("type", String(50), nullable=False,),  # tracteur
+        Column("submodel", String(50),),  #
+        Column("comments", String(500),),  # a very beautifull crop
+        Column("active", Integer,),  # 1
+    )
 
 
 class Input:
     """any input to use, fuel, engrais etc etc """
+
+    __table__ = Table(
+        Params.machines_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("owner", Integer, nullable=False),  # alexCPMHK
+        Column("ref", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("type", String(50), nullable=False),  # engrais
+        Column("subtype", String(50), nullable=False),  # engrais
+        Column("is_in_type", String(50), nullable=False),  # engrais
+        Column("quantity_volume", Float, nullable=False),  # 0
+        Column("quantity_unity", String(10), nullable=False),  # 0
+        Column("is_in_id", String(50),),  # engrais
+        Column("construtor", String(50)),  # engrais
+        Column("model", String(50),),  # engrais
+        Column("type", String(50),),  # engrais
+        Column("comments", String(500),),  # a very beautifull crop
+        Column("active", Integer,),  # 1
+    )
+
+
+####################################################
+# IO / BUYS / SELL / USE
+####################################################
+
+
+class ToolIO:
+    """A tool i"""
 
     pass
 
@@ -191,6 +262,11 @@ class MachineIO:
     """machine buy, use and sales"""
 
     pass
+
+
+####################################################
+# PROCESS / WORK / ETC
+####################################################
 
 
 class Project:
@@ -215,6 +291,11 @@ class MachineUsage:
     """One or more Rreservation for one task but one per human """
 
     pass
+
+
+####################################################
+# METEOROLOGIE
+####################################################
 
 
 class ParcelStation(Base):
