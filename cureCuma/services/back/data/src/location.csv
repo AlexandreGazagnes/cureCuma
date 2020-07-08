@@ -1,0 +1,7 @@
+created,category,pseudo,owner,adress,postcode,town,subtown,square,lattitude,longitude,active
+2020-01-01,parcel,Bonniere-devant,2,route de bonniere,45250,Chatillon-colligny,bonniere,10000,47.841988,2.862625,1
+2020-01-01,parcel,Bonniere-derriere-droite,2,route de bonniere,45250,Chatillon-colligny,bonniere,4000,47.841957,2.858044,1
+2020-01-01,parcel,Bonniere-derriere-gauche,3,route de bonniere,45250,Chatillon-colligny,bonniere,6000,47.840497,2.856686,1
+2020-01-01,construction,Hangar-cuma,1,monbouy,45500,monbouy,monbouy,3000,0,0,1
+2020-01-01,construction,Ferme-gilles,2,route de bonniere,45250,Chatillon-colligny,cacodeaux,-,0,0,1
+2020-01-01,construction,Ferme-pierre,3,route de bonniere,45250,Chatillon-colligny,bonniere,-,0,0,1

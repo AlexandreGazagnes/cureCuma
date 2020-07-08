@@ -59,6 +59,28 @@ class User(Base):
         return str(self.as_dict())
 
 
+class Message:
+    """just a standard message to be sent to any/some users """
+
+    __table__ = Table(
+        Params.messages_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("author", Integer, nullable=False),  # 1
+        Column("title", String(50), nullable=False),  # hello
+        Column("text", String(1000), nullable=False),  # mon premier message
+        Column("destination", String(50),),  # all
+        Column("category", String(50),),  # general
+    )
+
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+    def __repr__(self):
+        return str(self.as_dict())
+
+
 ####################################################
 # ORGANISATION
 ####################################################
@@ -82,19 +104,26 @@ class Company:
     pass
 
 
+class CompanyEmployee:
+    """a company """
+
+    pass
+
+
 ####################################################
 # OBJECTS
 ####################################################
 
 
-class Parcel(Base):
+class Location(Base):
     """any crop, land or earthpeice """
 
     __table__ = Table(
-        Params.parcels_tn,
+        Params.location_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("category", String(50), nullable=False,),  # alexCPMHK
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("owner", Integer, nullable=False),  # bonniere-devant
         Column("adress", String(50), nullable=False),  # route de bonniere
@@ -105,7 +134,7 @@ class Parcel(Base):
         Column("lattitute", Float,),  # 47.840
         Column("longitude", Float,),  # 2.8642
         Column("altitude", Integer,),  # 12
-        Column("ground", String(50),),  # normal
+        Column("subcategory", String(50),),  # alexCPMHK
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
     )
@@ -126,10 +155,11 @@ class Machine(Base):
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
         Column("owner", Integer, nullable=False),  # alexCPMHK
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("location_id", Integer, nullable=False),  # alexCPMHK
         Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
         Column("constructor", String(50), nullable=False, default=""),  # FENT
         Column("model", String(50), nullable=False, default=""),  # 850
-        Column("type", String(50), nullable=False,),  # tracteur
+        Column("category", String(50), nullable=False,),  # tracteur
         Column("oil_capacity", Integer, nullable=False,),  # 120
         Column("oil", Integer, nullable=False,),  # 80
         Column("kms", Integer, nullable=False,),  # tracteur
@@ -176,28 +206,6 @@ class Machine(Base):
         return str(self.as_dict())
 
 
-class Message:
-    """just a standard message to be sent to any/some users """
-
-    __table__ = Table(
-        Params.messages_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        Column("author", Integer, nullable=False),  # 1
-        Column("title", String(50), nullable=False),  # hello
-        Column("text", String(1000), nullable=False),  # mon premier message
-        Column("destination", String(50),),  # all
-        Column("category", String(50),),  # general
-    )
-
-    def as_dict(self):
-        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
-
-    def __repr__(self):
-        return str(self.as_dict())
-
-
 class Tool:
     """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
 
@@ -207,10 +215,11 @@ class Tool:
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
         Column("owner", Integer, nullable=False),  # alexCPMHK
+        Column("location_id", Integer, nullable=False),  # alexCPMHK
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("constructor", String(50), nullable=False, default=""),  # FENT
         Column("model", String(50), nullable=False, default=""),  # 850
-        Column("type", String(50), nullable=False,),  # tracteur
+        Column("category", String(50), nullable=False,),  # tracteur
         Column("submodel", String(50),),  #
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
@@ -227,15 +236,15 @@ class Input:
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
         Column("owner", Integer, nullable=False),  # alexCPMHK
         Column("ref", String(50), nullable=False, unique=True),  # alexCPMHK
-        Column("type", String(50), nullable=False),  # engrais
-        Column("subtype", String(50), nullable=False),  # engrais
-        Column("is_in_type", String(50), nullable=False),  # engrais
+        Column("category", String(50), nullable=False),  # engrais
+        Column("subcategory", String(50), nullable=False),  # engrais
+        # TO DO JUST GplaceHERE
+        Column("in_category", Integer, nullable=False),  # alexCPMHK
+        Column("in_id", Integer, nullable=False),
         Column("quantity_volume", Float, nullable=False),  # 0
         Column("quantity_unity", String(10), nullable=False),  # 0
-        Column("is_in_id", String(50),),  # engrais
         Column("construtor", String(50)),  # engrais
         Column("model", String(50),),  # engrais
-        Column("type", String(50),),  # engrais
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
     )
@@ -246,22 +255,22 @@ class Input:
 ####################################################
 
 
-class ToolIO:
-    """A tool i"""
+# class ToolIO:
+#     """A tool i"""
 
-    pass
-
-
-class InputIO:
-    """input buy, use and sales"""
-
-    pass
+#     pass
 
 
-class MachineIO:
-    """machine buy, use and sales"""
+# class InputIO:
+#     """input buy, use and sales"""
 
-    pass
+#     pass
+
+
+# class MachineIO:
+#     """machine buy, use and sales"""
+
+#     pass
 
 
 ####################################################
@@ -269,28 +278,28 @@ class MachineIO:
 ####################################################
 
 
-class Project:
-    """a project is for 1 year, 1 parcel, 1 culture """
+# class Project:
+#     """a project is for 1 year, 1 parcel, 1 culture """
 
-    pass
-
-
-class Task:
-    """One task"""
-
-    pass
+#     pass
 
 
-class WorkContract:
-    """One or more Workcontract for one task but one per human """
+# class Task:
+#     """One task"""
 
-    pass
+#     pass
 
 
-class MachineUsage:
-    """One or more Rreservation for one task but one per human """
+# class WorkContract:
+#     """One or more Workcontract for one task but one per human """
 
-    pass
+#     pass
+
+
+# class MachineUsage:
+#     """One or more Rreservation for one task but one per human """
+
+#     pass
 
 
 ####################################################
@@ -298,41 +307,41 @@ class MachineUsage:
 ####################################################
 
 
-class ParcelStation(Base):
-    __table__ = Table(
-        Params.parcelstation_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        # station
-        # temperature)
-    )
+# class ParcelStation(Base):
+#     __table__ = Table(
+#         Params.parcelstation_tn,
+#         Base.metadata,
+#         Column("id", Integer, primary_key=True),  # 0
+#         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+#         # station
+#         # temperature)
+#     )
 
-    def as_dict(self):
-        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+#     def as_dict(self):
+#         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
 
-    def __repr__(self):
-        return str(self.as_dict())
+#     def __repr__(self):
+#         return str(self.as_dict())
 
 
-class ParcelWeather(Base):
-    __table__ = Table(
-        Params.parcelweather_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        # station_id
-        # temperature
-        # rain
-        # sun
-        # atmPressure
-        # wind_forece
-        # wind_direction
-    )
+# class ParcelWeather(Base):
+#     __table__ = Table(
+#         Params.parcelweather_tn,
+#         Base.metadata,
+#         Column("id", Integer, primary_key=True),  # 0
+#         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+#         # station_id
+#         # temperature
+#         # rain
+#         # sun
+#         # atmPressure
+#         # wind_forece
+#         # wind_direction
+#     )
 
-    def as_dict(self):
-        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+#     def as_dict(self):
+#         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
 
-    def __repr__(self):
-        return str(self.as_dict())
+#     def __repr__(self):
+#         return str(self.as_dict())
 

@@ -1,6 +1,6 @@
-created,owner,plaque,pseudo,constructor,model,type,oil_capacity,oil,kms,hours,auth_tools,comments,active
-2020-01-01,1,AZE-123-AZE,fendt-cuma,fendt,850Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur cuma pour tous,1
-2020-01-01,1,QSD-123-QSD,grosse-josianne,john deere,770i,batteuse,300,100,100,300,coupe,moiss bat prinicpale pour le ble,1
-2020-01-01,2,LKJ-123-POI,Fendt-gilles-1,fendt,750Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur gilles,1
-2020-01-01,2,NBV-456-LKJ,Fendt-gilles-2,fendt,850,tractor,150,0,300,1000,"benne,semoir,presse",Tracteur 2 gilles,1
-2020-01-01,3,WXC-987-YUI,Fendt-gilles-750,fendt,850Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur pierre,1
+created,owner,location_id,plaque,pseudo,constructor,model,type,oil_capacity,oil,kms,hours,auth_tools,comments,active
+2020-01-01,1,1,AZE-123-AZE,fendt-cuma,fendt,850Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur cuma pour tous,1
+2020-01-01,1,1,QSD-123-QSD,grosse-josianne,john deere,770i,batteuse,300,100,100,300,coupe,moiss bat prinicpale pour le ble,1
+2020-01-01,2,1,LKJ-123-POI,Fendt-gilles-1,fendt,750Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur gilles,1
+2020-01-01,2,2,NBV-456-LKJ,Fendt-gilles-2,fendt,850,tractor,150,0,300,1000,"benne,semoir,presse",Tracteur 2 gilles,1
+2020-01-01,3,2,WXC-987-YUI,Fendt-gilles-750,fendt,850Vario,tractor,150,0,300,1000,"benne,semoir,presse",tracteur pierre,1
