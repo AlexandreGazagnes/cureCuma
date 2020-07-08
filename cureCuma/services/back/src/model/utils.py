@@ -84,7 +84,7 @@ class ModelUtils:
 
         # get existing Tables
         try:
-            existing_tables = show_tables()
+            existing_tables = ModelUtils._show_tables()
             logger.info(f"existing_tables is {existing_tables} ")
         except Exception as e:
             if not silent_raise:
@@ -128,8 +128,8 @@ class ModelUtils:
         """feed with dummy values if empty tables  """
 
         logger.info("called")
-        create_data_if_needed("users", User)
-        create_data_if_needed("machines", Machine)
+        ModelUtils._create_data_if_needed("users", User)
+        ModelUtils._create_data_if_needed("machines", Machine)
 
     @staticmethod
     def _create_data_if_needed(filename, TableObj, silent_raise=True):
@@ -173,70 +173,71 @@ class ModelUtils:
         sess.close()
         return 1
 
-    # def rm_db():
 
-    #     logger.debug("called")
+# def rm_db():
 
-    #     db_filename = Params.data + Params.datadb + ".db"
-    #     if os.path.isfile(db_filename):
-    #         os.remove(db_filename)
+#     logger.debug("called")
 
-    # def clean_tables():
-    #     """ """
+#     db_filename = Params.data + Params.datadb + ".db"
+#     if os.path.isfile(db_filename):
+#         os.remove(db_filename)
 
-    #     logger.debug("called")
+# def clean_tables():
+#     """ """
 
-    #     from src.model.tables import Base, Transaction, Sale, Membre, engine
-    #     from src.model import Session
+#     logger.debug("called")
 
-    #     # delete previous tab
-    #     sess = Session()
-    #     sess.query(Sale).delete()
-    #     sess.commit()
-    #     sess.query(Transaction).delete()
-    #     sess.commit()
-    #     sess.query(Membre).delete()
-    #     sess.commit()
+#     from src.model.tables import Base, Transaction, Sale, Membre, engine
+#     from src.model import Session
 
-    #     sess.close()
+#     # delete previous tab
+#     sess = Session()
+#     sess.query(Sale).delete()
+#     sess.commit()
+#     sess.query(Transaction).delete()
+#     sess.commit()
+#     sess.query(Membre).delete()
+#     sess.commit()
 
-    # def drop_tables():
-    #     """ """
+#     sess.close()
 
-    #     logger.debug("called")
-    #     from src.model.tables import Base, Transaction, Sale, Membre, engine
-    #     from src.model import Session
+# def drop_tables():
+#     """ """
 
-    #     Base.metadata.drop_all(
-    #         bind=engine, tables=[Transaction.__table__, Sale.__table__, Member.__table__]
-    #     )
+#     logger.debug("called")
+#     from src.model.tables import Base, Transaction, Sale, Membre, engine
+#     from src.model import Session
 
-    # def create_table_if_needed(silent_raise=True):
-    #     """create tables if no exists  """
+#     Base.metadata.drop_all(
+#         bind=engine, tables=[Transaction.__table__, Sale.__table__, Member.__table__]
+#     )
 
-    #     logger.debug("called")
+# def create_table_if_needed(silent_raise=True):
+#     """create tables if no exists  """
 
-    #     # tables existanece
-    #     try:
-    #         existing_tables = show_tables()
-    #         logger.warning(
-    #             f"existing tables : {existing_tables} ({type(existing_tables)}) "
-    #         )
-    #         return 0
-    #     except Exception as e:
-    #         if not silent_raise:
-    #             raise e
-    #         logger.error(e)
-    #         return 1
+#     logger.debug("called")
 
-    #     # create tables
-    #     # if not (Params.newsletter_tablename in existing_tables):
-    #     #     logger.warning("ask for create table")
-    #     try:
-    #         create_table()
-    #         return 0
-    #     except Exception as e:
-    #         if not silent_raise:
-    #             raise e
-    #         logger.error(e)
-    #         return 2
+#     # tables existanece
+#     try:
+#         existing_tables = show_tables()
+#         logger.warning(
+#             f"existing tables : {existing_tables} ({type(existing_tables)}) "
+#         )
+#         return 0
+#     except Exception as e:
+#         if not silent_raise:
+#             raise e
+#         logger.error(e)
+#         return 1
+
+#     # create tables
+#     # if not (Params.newsletter_tablename in existing_tables):
+#     #     logger.warning("ask for create table")
+#     try:
+#         create_table()
+#         return 0
+#     except Exception as e:
+#         if not silent_raise:
+#             raise e
+#         logger.error(e)
+#         return 2

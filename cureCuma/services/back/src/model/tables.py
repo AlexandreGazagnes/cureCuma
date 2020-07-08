@@ -18,31 +18,68 @@ from sqlalchemy import (
     Text,
 )
 
-
 from sqlalchemy.ext.declarative import declarative_base
 
 from params import GeneralParams as Params
 
 # from src.model.dB import engine, Base
 from src.model import engine, Base, Session
+from src import logger
+
+
+####################################################
+# ROOT LEVEl
+####################################################
 
 
 class User(Base):
+    """User"""
 
     __table__ = Table(
         Params.users_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
-        Column(
-            "created", String(20), nullable=False, default=""
-        ),  # 2020-01-01 00:00:00
-        Column("email", String(50), nullable=False),  # alex@duei.fr
-        Column("pseudo", String(50), nullable=False),  # alexCPMHK
-        Column("password", String(50), nullable=False),  # azerty
-        Column("firstname", String(50), nullable=False, default=""),  # alexandre
-        Column("lastname", String(50), nullable=False, default=""),  # gazagnes
-        Column("phone", String(50), nullable=False, default=""),  #  + 33 6 43 00 46 26
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("email", String(50), nullable=False, unique=True),  # alex@ei.fr
+        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("password", String(50), nullable=False,),  # azerty
         Column("admin", Integer, nullable=False, default=0),  # 1 or 0
+        Column("status", String(50)),  # employe, propriaitaire etc
+        Column("firstname", String(50),),  # alexandre
+        Column("lastname", String(50),),  # gazagnes
+        Column("phone", String(50),),  #  + 33 6 43 00 46 26
+        Column("comments", String(500),),
+        Column("active", Integer,),
+    )
+
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+    def __repr__(self):
+        return str(self.as_dict())
+
+
+class Parcel(Base):
+    """any crop, land or earthpeice """
+
+    __table__ = Table(
+        Params.parcels_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("owner", Integer, nullable=False),  # bonniere-devant
+        Column("adresse", String(50), nullable=False),  # route de bonniere
+        Column("postcode", String(5), nullable=False),  # 45230
+        Column("town", String(50), nullable=False),  # Chatillon-colligny
+        Column("subtown", String(50), nullable=False),  # boniere
+        Column("square", Float,),  # 10
+        Column("lattitute", Float,),  # 47.840
+        Column("longitude", Float,),  # 2.8642
+        Column("altitude", Integer,),  # 12
+        Column("ground", String(50),),  # normal
+        Column("comments", String(500),),  # a very beautifull crop
+        Column("active", Integer,),  # 1
     )
 
     def as_dict(self):
@@ -58,14 +95,71 @@ class Machine(Base):
         Params.machines_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
-        # Column("email", String(50)),  # fent67@cuma.fr
-        Column("plaque", String(50), nullable=False),  # CZEH Z331
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("owner", Integer, nullable=False),  # alexCPMHK
+        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
         Column("constructor", String(50), nullable=False, default=""),  # FENT
         Column("model", String(50), nullable=False, default=""),  # 850
-        Column("_type", String(50), nullable=False, default=""),  # tracteur
-        Column(
-            "acquisition", String(20), nullable=False, default=""
-        ),  # 2020-01-01 00:00:00
+        Column("type", String(50), nullable=False,),  # tracteur
+        Column("oil_capacity", Integer, nullable=False,),  # 120
+        Column("oil", Integer, nullable=False,),  # 80
+        Column("kms", Integer, nullable=False,),  # tracteur
+        Column("hours", Integer, nullable=False,),  # tracteur
+        Column("auth_tools", String(500),),  # tracteur
+        Column("comments", String(500),),  # a very beautifull crop
+        Column("active", Integer,),  # 1
+    )
+
+    def consume(self, oil, kms, hours):
+        """reprsentaion of obj modification """
+
+        logger.debug("called")
+
+        self.hours += hours
+        self.kms += kms
+        self.oil -= oil
+        if self.oil < 0:
+            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+            self.oil = 0
+
+    def partial_refuel(self, oil):
+        """partial refuell """
+
+        logger.debug("called")
+
+        self.oil += int(oil)
+        if self.oil > self.oil_capacity:
+            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+            self.oil = self.oil_capacity
+
+    def full_refuel(self):
+        """reprsentaion of obj modification """
+
+        logger.debug("called")
+
+        self.oil = self.oil_capacity
+
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+    def __repr__(self):
+        return str(self.as_dict())
+
+
+class Message:
+    """just a standard message to be sent to any/some users """
+
+    __table__ = Table(
+        Params.messages_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("author", Integer, nullable=False),  # 1
+        Column("title", String(50), nullable=False),  # hello
+        Column("text", String(1000), nullable=False),  # mon premier message
+        Column("destination", String(50),),  # all
+        Column("category", String(50),),  # general
     )
 
     def as_dict(self):
@@ -73,3 +167,91 @@ class Machine(Base):
 
     def __repr__(self):
         return str(self.as_dict())
+
+
+class Tool:
+    """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
+
+    pass
+
+
+class Input:
+    """any input to use, fuel, engrais etc etc """
+
+    pass
+
+
+class InputIO:
+    """input buy, use and sales"""
+
+    pass
+
+
+class MachineIO:
+    """machine buy, use and sales"""
+
+    pass
+
+
+class Project:
+    """a project is for 1 year, 1 parcel, 1 culture """
+
+    pass
+
+
+class Task:
+    """One task"""
+
+    pass
+
+
+class WorkContract:
+    """One or more Workcontract for one task but one per human """
+
+    pass
+
+
+class MachineUsage:
+    """One or more Rreservation for one task but one per human """
+
+    pass
+
+
+class ParcelStation(Base):
+    __table__ = Table(
+        Params.parcelstation_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        # station
+        # temperature)
+    )
+
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+    def __repr__(self):
+        return str(self.as_dict())
+
+
+class ParcelWeather(Base):
+    __table__ = Table(
+        Params.parcelweather_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        # station_id
+        # temperature
+        # rain
+        # sun
+        # atmPressure
+        # wind_forece
+        # wind_direction
+    )
+
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+    def __repr__(self):
+        return str(self.as_dict())
+
