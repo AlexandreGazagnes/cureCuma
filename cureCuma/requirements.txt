@@ -1,4 +1,5 @@
 # flask / web
+flask
 flask_bcrypt
 requests
 gunicorn
