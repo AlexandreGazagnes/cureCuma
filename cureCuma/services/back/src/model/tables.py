@@ -86,28 +86,28 @@ class Message:
 ####################################################
 
 
-class Cuma:
-    """a Cuma"""
+# class Cuma:
+#     """a Cuma"""
 
-    pass
-
-
-class CumaUser:
-    """all user for one or more cuma """
-
-    pass
+#     pass
 
 
-class Company:
-    """a company """
+# class CumaUser:
+#     """all user for one or more cuma """
 
-    pass
+#     pass
 
 
-class CompanyEmployee:
-    """a company """
+# class Company:
+#     """a company """
 
-    pass
+#     pass
+
+
+# class CompanyEmployee:
+#     """a company """
+
+#     pass
 
 
 ####################################################
@@ -119,7 +119,7 @@ class Location(Base):
     """any crop, land or earthpeice """
 
     __table__ = Table(
-        Params.location_tn,
+        Params.locations_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
@@ -210,7 +210,7 @@ class Tool:
     """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
 
     __table__ = Table(
-        Params.machines_tn,
+        Params.tools_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
@@ -230,7 +230,7 @@ class Input:
     """any input to use, fuel, engrais etc etc """
 
     __table__ = Table(
-        Params.machines_tn,
+        Params.inputs_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00

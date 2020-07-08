@@ -18,13 +18,12 @@ class GeneralParams:
     port = int(os.getenv("BACK_PORT", 123))
 
     # tables
+    messages_tn = os.getenv("MESSAGE_TABLENAME", "messages")
+    locations_tn = os.getenv("LOCATION_TABLENAME", "locations")
     users_tn = os.getenv("USER_TABLENAME", "users")
     machines_tn = os.getenv("MACHINE_TABLENAME", "machines")
     tools_tn = os.getenv("TOOL_TABLENAME", "tools")
-    messages_tn = os.getenv("MESSAGE_TABLENAME", "messages")
-    contracts_tn = os.getenv("CONTRACT_TABLENAME", "contracts")
-    reservations_tn = os.getenv("RESERVATION_TABLENAME", "reservations")
-    works_tn = os.getenv("WORK_TABLENAME", "works")
+    inputs_tn = os.getenv("INPUT_TABLENAME", "inputs")
 
     # database
     datadb = os.getenv("MYSQL_DATABASE", "cpmhkdb")
