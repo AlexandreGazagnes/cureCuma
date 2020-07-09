@@ -27,7 +27,7 @@ class GeneralParams:
 
     # database
     datadb = os.getenv("MYSQL_DATABASE", "cpmhkdb")
-    db_user = os.getenv("MYSQL_USER", "cpmhk_aime_sql")
+    db_user = os.getenv("MYSQL_USER", "curecuma")
     db_password = os.getenv("MYSQL_PASSWORD", "azerty")
     db_host = os.getenv("MYSQL_HOST", "mysql")
     db_port = os.getenv("MYSQL_PORT", "3306")

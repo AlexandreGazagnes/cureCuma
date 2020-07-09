@@ -131,7 +131,7 @@ class ModelUtils:
         ModelUtils._create_data_if_needed("users", User)
         ModelUtils._create_data_if_needed("machines", Machine)
         ModelUtils._create_data_if_needed("messages", Message)
-        ModelUtils._create_data_if_needed("tools", Tool
+        ModelUtils._create_data_if_needed("tools", Tool)
         ModelUtils._create_data_if_needed("locations", Location)
         ModelUtils._create_data_if_needed("inputs", Input)
 
