@@ -131,7 +131,7 @@ class Location(Base):
         Column("town", String(50), nullable=False),  # Chatillon-colligny
         Column("subtown", String(50), nullable=False),  # boniere
         Column("square", Float,),  # 10
-        Column("lattitute", Float,),  # 47.840
+        Column("latitude", Float,),  # 47.840
         Column("longitude", Float,),  # 2.8642
         Column("altitude", Integer,),  # 12
         Column("subcategory", String(50),),  # alexCPMHK
