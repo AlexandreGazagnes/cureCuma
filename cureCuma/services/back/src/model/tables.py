@@ -59,7 +59,7 @@ class User(Base):
         return str(self.as_dict())
 
 
-class Message:
+class Message(Base):
     """just a standard message to be sent to any/some users """
 
     __table__ = Table(
@@ -206,7 +206,7 @@ class Machine(Base):
         return str(self.as_dict())
 
 
-class Tool:
+class Tool(Base):
     """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
 
     __table__ = Table(
@@ -226,7 +226,7 @@ class Tool:
     )
 
 
-class Input:
+class Input(Base):
     """any input to use, fuel, engrais etc etc """
 
     __table__ = Table(

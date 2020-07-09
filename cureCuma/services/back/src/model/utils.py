@@ -139,7 +139,7 @@ class ModelUtils:
     def _create_data_if_needed(filename, TableObj, silent_raise=True):
         """feed with dummy data  """
 
-        logger.info("called")
+        logger.info(f"called for {filename} ")
 
         # session
         sess = Session()
