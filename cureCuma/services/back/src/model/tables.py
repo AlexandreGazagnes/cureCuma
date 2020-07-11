@@ -238,8 +238,7 @@ class Input(Base):
         Column("ref", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("category", String(50), nullable=False),  # engrais
         Column("subcategory", String(50), nullable=False),  # engrais
-        # TO DO JUST GplaceHERE
-        Column("in_category", Integer, nullable=False),  # alexCPMHK
+        Column("in_category", String(50), nullable=False),  # alexCPMHK
         Column("in_id", Integer, nullable=False),
         Column("quantity_volume", Float, nullable=False),  # 0
         Column("quantity_unity", String(10), nullable=False),  # 0
