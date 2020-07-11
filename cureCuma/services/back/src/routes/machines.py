@@ -1,6 +1,7 @@
 import requests
 import time
 import json
+import datetime
 from dateutil.parser import parse
 
 from flask import (
@@ -20,6 +21,9 @@ from params import GeneralParams as Params
 from src import logger
 
 from src.model.tables import engine, Session, Machine
+from src.routes.response_manager import response_manager
+from src.functs.machines.get import machines_get
+from src.functs.machines.post import machines_post
 
 machines = Blueprint("machines", __name__)
 
@@ -29,7 +33,7 @@ def ping():
     """just a ping for  test"""
     logger.debug("called")
 
-    return "pong", 200
+    return response_manager(200, "-", ["pong",], "just a test route")
 
 
 @machines.route("/machines", methods=["POST", "GET", "PUT", "DELETE"])
@@ -39,27 +43,9 @@ def machines_api():
 
     # get
     if request.method == "GET":
-        # gather all
-        sess = Session()
-        data_payload = sess.query(Machine).all()
-        sess.close()
-        # payload
-        if len(data_payload):
-            data_payload = [i.as_dict() for i in data_payload]
-        # response
-        response = {"status": "ok", "data": data_payload, "method": "GET", "error": ""}
-        response = jsonify(response)
-        response.status_code = 200
-        return response
+        return machines_get()
 
-    # default
-    response = {
-        "status": "error",
-        "data": "",
-        "method": "GET",
-        "error": "not implemented",
-    }
-    response = jsonify(response)
-    response.status_code = 500
-    return response
+    if request.method == "POST":
+        return machines_post(request)
 
+    return response_manager(505, "", "", "", "route not handled")
