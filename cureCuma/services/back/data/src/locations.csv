@@ -1,7 +1,9 @@
-created,category,pseudo,owner,adress,postcode,town,subtown,square,latitude,longitude,active
-2020-01-01,parcel,Bonniere-devant,2,route de bonniere,45250,Chatillon-colligny,bonniere,10000,47.841988,2.862625,1
-2020-01-01,parcel,Bonniere-derriere-droite,2,route de bonniere,45250,Chatillon-colligny,bonniere,4000,47.841957,2.858044,1
-2020-01-01,parcel,Bonniere-derriere-gauche,3,route de bonniere,45250,Chatillon-colligny,bonniere,6000,47.840497,2.856686,1
-2020-01-01,construction,Hangar-cuma,1,monbouy,45500,monbouy,monbouy,3000,0,0,1
-2020-01-01,construction,Ferme-gilles,2,route de bonniere,45250,Chatillon-colligny,cacodeaux,1000,0,0,1
-2020-01-01,construction,Ferme-pierre,3,route de bonniere,45250,Chatillon-colligny,bonniere,1000,0,0,1
+created,category,name,user_id,adress,postcode,town,subtown,square,latitude,longitude,active,comments
+2001-01-01,parcel,Bonniere-devant,4,route de bonniere,45230,Chatillon-colligny,bonniere,10000,47.841988,2.862625,1,parcelle devant bonniere a pierre
+2002-01-01,parcel,La-mardelle-Nord,2,route de bonniere,45230,Chatillon-colligny,bonniere,4000,47.841957,2.858044,1,parcelle achetee par Gilles
+2003-01-01,parcel,La-mardelle-Sud,2,route de bonniere,45230,Chatillon-colligny,bonniere,6000,47.840497,2.856686,1,parcelle achetee par Gilles
+2004-01-01,construction,hangar-cuma,3,route de chatillon-coligny,45230,Montbouy,-,1000,47.857205,2.826121,1,btp principal de la Cuma de gilles
+2005-01-01,construction,ferme-des-cacodeaux,2,ferme des cacodeaux,45230,Chatillon-colligny,cacodeaux,1000,47.816871,2.911575,1,"ferme de gilles "
+2006-01-01,construction,ferme-debonniere,4,ferme de bonnière,45230,Chatillon-colligny,bonniere,1000,47.839140,2.864880,1,ferme de Pierre
+2007-01-01,construction,donjon-de-rouen,5,75 rue du donjon,76000,Rouen,-,1000,49.446439,1.095343,1,ferme de alex et antoine
+2008-01-01,parcel,square-verdel,5,14 rue du baillage,76000,Rouen,-,1000,49.445100," 1.093444",1,champ fictif pour alex et antoine

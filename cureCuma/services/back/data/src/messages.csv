@@ -1,2 +1,2 @@
-created,author,title,text,destination,category
+created,user_id,title,text,destination,category
 2020-01-01,1,hello,salut tout le monde,all,-
