@@ -1,0 +1,5 @@
+created,user_id,account_id,adherent,administrator,role,employee,executive
+2000-01-01,2,2,1,1,tresorier,0,1
+2001-01-01,4,2,1,0,adherent,0,0
+2002-01-01,5,2,1,0,adherent,0,0
+2003-01-01,6,2,0,0,employee,1,0
