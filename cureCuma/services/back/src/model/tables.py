@@ -28,7 +28,7 @@ from src import logger
 
 
 ####################################################
-# HUMAN
+# USER
 ####################################################
 
 
@@ -47,13 +47,12 @@ class User(Base):
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("email", String(50), nullable=False, unique=True),  # alex@ei.fr
         Column("password", String(50), nullable=False,),  # azerty
-        Column("is_human", Integer, nullable=False),
+        Column("category", Integer, nullable=False),  # human, account /subAccount
         Column("firstname", String(50),),  # alexandre
         Column("lastname", String(50),),  # gazagnes
         Column("phone", String(50),),  #  + 33 6 43 00 46 26
         Column("birthdate", String(20),),  # 20/11/1986
         Column("security_number", String(50),),  #  1 06.11.12.12.11
-        Column("location_id", Integer,),  # only for employee???
         Column("comments", String(500),),
         Column("active", Integer,),
     )
@@ -144,7 +143,7 @@ class Account(Base):
     if just for one personn user_id refer to self and cpmpany_id refter to self if cuma user_id refer to a fake user auto created and company_id shoul be created"""
 
     __table__ = Table(
-        Params.companies_tn,
+        Params.accounts_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
@@ -175,7 +174,9 @@ class AccountUser:
         Column("user_id", Integer, nullable=False),
         Column("account_id", Integer, nullable=False),
         Column("adherent", Integer, nullable=False),
-        Column("administrator", Integer, nullable=False),  # APPLICATION ADMINSTRATOR
+        Column("administrator", Integer, nullable=False),  # APP ADMI
+        Column("executive", Integer, nullable=False),  # APP ADMI
+        Column("manager", Integer, nullable=False),  # APP ADMI
         Column("role", String(50), nullable=False),
         Column("employee", Integer, nullable=False),
         Column("comments", String(500),),
