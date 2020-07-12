@@ -32,7 +32,7 @@ class TestMAchinePost:
         url = TestMAchinePost.URL + "machines"
         response = requests.post(url, payload)
         print(response.text)
-        assert response.status_code == 200
+        assert response.status_code < 299
 
         # payload = response.json()
         # assert isinstance(payload, dict)

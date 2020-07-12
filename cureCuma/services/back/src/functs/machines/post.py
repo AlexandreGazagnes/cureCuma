@@ -35,8 +35,7 @@ def machines_post(request):
         return response_manager(500, "POST", "None", "", "not payload")
     # paylod in Obj
     try:
-        assert isinstance(payload, dict)
-        machine["created"] = str(datetime.datetime.now())[:19]
+        payload.update(created=str(datetime.datetime.now())[:19])
         machine = Machine(**payload)
     except Exception as e:
         return response_manager(

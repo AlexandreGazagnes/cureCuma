@@ -46,6 +46,10 @@ def machines_api():
         return machines_get()
 
     if request.method == "POST":
+
+        logger.critical(request.args)
+        logger.critical(request.json)
+        logger.critical(request.get_json(force=True))
         return machines_post(request)
 
     return response_manager(505, "", "", "", "route not handled")
