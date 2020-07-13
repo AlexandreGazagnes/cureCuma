@@ -163,7 +163,7 @@ class Account(Base):
         return str(self.as_dict())
 
 
-class AccountUser:
+class AccountUser(Base):
     """all user for one or more cuma """
 
     __table__ = Table(
@@ -223,180 +223,63 @@ class Company(Base):
 #     pass
 
 
-####################################################
-# OBJECTS
-####################################################
+# ####################################################
+# # OBJECTS
+# ####################################################
 
 
-class Machine(Base):
+# class Machine(Base):
 
-    __table__ = Table(
-        Params.machines_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
-        Column("user_id", Integer, nullable=False),  # alexCPMHK
-        Column("location_id", Integer, nullable=False),  # alexCPMHK
-        Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
-        Column("constructor", String(50), nullable=False, default=""),  # FENT
-        Column("model", String(50), nullable=False, default=""),  # 850
-        Column("category", String(50), nullable=False,),  # tracteur
-        Column("oil_capacity", Integer, nullable=False,),  # 120
-        Column("oil", Integer, nullable=False,),  # 80
-        Column("kms", Integer, nullable=False,),  # tracteur
-        Column("hours", Integer, nullable=False,),  # tracteur
-        Column("submodel", String(50),),  #
-        Column("auth_tools", String(500),),  # tracteur
-        Column("comments", String(500),),  # a very beautifull crop
-        Column("active", Integer,),  # 1
-    )
-
-    def consume(self, oil, kms, hours):
-        """reprsentaion of obj modification """
-
-        logger.debug("called")
-
-        self.hours += hours
-        self.kms += kms
-        self.oil -= oil
-        if self.oil < 0:
-            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
-            self.oil = 0
-
-    def partial_refuel(self, oil):
-        """partial refuell """
-
-        logger.debug("called")
-
-        self.oil += int(oil)
-        if self.oil > self.oil_capacity:
-            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
-            self.oil = self.oil_capacity
-
-    def full_refuel(self):
-        """reprsentaion of obj modification """
-
-        logger.debug("called")
-
-        self.oil = self.oil_capacity
-
-    def as_dict(self):
-        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
-
-    def __repr__(self):
-        return str(self.as_dict())
-
-
-class Tool(Base):
-    """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
-
-    __table__ = Table(
-        Params.tools_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        Column("owner", Integer, nullable=False),  # alexCPMHK
-        Column("location_id", Integer, nullable=False),  # alexCPMHK
-        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
-        Column("constructor", String(50), nullable=False, default=""),  # FENT
-        Column("model", String(50), nullable=False, default=""),  # 850
-        Column("category", String(50), nullable=False,),  # tracteur
-        Column("submodel", String(50),),  #
-        Column("comments", String(500),),  # a very beautifull crop
-        Column("active", Integer,),  # 1
-    )
-
-
-class Input(Base):
-    """any input to use, fuel, engrais etc etc """
-
-    __table__ = Table(
-        Params.inputs_tn,
-        Base.metadata,
-        Column("id", Integer, primary_key=True),  # 0
-        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        Column("owner", Integer, nullable=False),  # alexCPMHK
-        Column("ref", String(50), nullable=False, unique=True),  # alexCPMHK
-        Column("category", String(50), nullable=False),  # engrais
-        Column("subcategory", String(50), nullable=False),  # engrais
-        Column("in_category", String(50), nullable=False),  # alexCPMHK
-        Column("in_id", Integer, nullable=False),
-        Column("quantity_volume", Float, nullable=False),  # 0
-        Column("quantity_unity", String(10), nullable=False),  # 0
-        Column("construtor", String(50)),  # engrais
-        Column("model", String(50),),  # engrais
-        Column("comments", String(500),),  # a very beautifull crop
-        Column("active", Integer,),  # 1
-    )
-
-
-####################################################
-# IO / BUYS / SELL / USE
-####################################################
-
-
-# class ToolIO:
-#     """A tool i"""
-
-#     pass
-
-
-# class InputIO:
-#     """input buy, use and sales"""
-
-#     pass
-
-
-# class MachineIO:
-#     """machine buy, use and sales"""
-
-#     pass
-
-
-####################################################
-# PROCESS / WORK / ETC
-####################################################
-
-
-# class Project:
-#     """a project is for 1 year, 1 parcel, 1 culture """
-
-#     pass
-
-
-# class Task:
-#     """One task"""
-
-#     pass
-
-
-# class WorkContract:
-#     """One or more Workcontract for one task but one per human """
-
-#     pass
-
-
-# class MachineUsage:
-#     """One or more Rreservation for one task but one per human """
-
-#     pass
-
-
-####################################################
-# METEOROLOGIE
-####################################################
-
-
-# class ParcelStation(Base):
 #     __table__ = Table(
-#         Params.parcelstation_tn,
+#         Params.machines_tn,
 #         Base.metadata,
 #         Column("id", Integer, primary_key=True),  # 0
-#         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-#         # station
-#         # temperature)
+#         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+#         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+#         Column("user_id", Integer, nullable=False),  # alexCPMHK
+#         Column("location_id", Integer, nullable=False),  # alexCPMHK
+#         Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
+#         Column("constructor", String(50), nullable=False, default=""),  # FENT
+#         Column("model", String(50), nullable=False, default=""),  # 850
+#         Column("category", String(50), nullable=False,),  # tracteur
+#         Column("oil_capacity", Integer, nullable=False,),  # 120
+#         Column("oil", Integer, nullable=False,),  # 80
+#         Column("kms", Integer, nullable=False,),  # tracteur
+#         Column("hours", Integer, nullable=False,),  # tracteur
+#         Column("submodel", String(50),),  #
+#         Column("auth_tools", String(500),),  # tracteur
+#         Column("comments", String(500),),  # a very beautifull crop
+#         Column("active", Integer,),  # 1
 #     )
+
+#     def consume(self, oil, kms, hours):
+#         """reprsentaion of obj modification """
+
+#         logger.debug("called")
+
+#         self.hours += hours
+#         self.kms += kms
+#         self.oil -= oil
+#         if self.oil < 0:
+#             logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+#             self.oil = 0
+
+#     def partial_refuel(self, oil):
+#         """partial refuell """
+
+#         logger.debug("called")
+
+#         self.oil += int(oil)
+#         if self.oil > self.oil_capacity:
+#             logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+#             self.oil = self.oil_capacity
+
+#     def full_refuel(self):
+#         """reprsentaion of obj modification """
+
+#         logger.debug("called")
+
+#         self.oil = self.oil_capacity
 
 #     def as_dict(self):
 #         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
@@ -405,24 +288,141 @@ class Input(Base):
 #         return str(self.as_dict())
 
 
-# class ParcelWeather(Base):
+# class Tool(Base):
+#     """A tool is a non selpowered mechanics sush as coupe, benne etc etc"""
+
 #     __table__ = Table(
-#         Params.parcelweather_tn,
+#         Params.tools_tn,
 #         Base.metadata,
 #         Column("id", Integer, primary_key=True),  # 0
-#         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-#         # station_id
-#         # temperature
-#         # rain
-#         # sun
-#         # atmPressure
-#         # wind_forece
-#         # wind_direction
+#         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+#         Column("owner", Integer, nullable=False),  # alexCPMHK
+#         Column("location_id", Integer, nullable=False),  # alexCPMHK
+#         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+#         Column("constructor", String(50), nullable=False, default=""),  # FENT
+#         Column("model", String(50), nullable=False, default=""),  # 850
+#         Column("category", String(50), nullable=False,),  # tracteur
+#         Column("submodel", String(50),),  #
+#         Column("comments", String(500),),  # a very beautifull crop
+#         Column("active", Integer,),  # 1
 #     )
 
-#     def as_dict(self):
-#         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
 
-#     def __repr__(self):
-#         return str(self.as_dict())
+# class Input(Base):
+#     """any input to use, fuel, engrais etc etc """
+
+#     __table__ = Table(
+#         Params.inputs_tn,
+#         Base.metadata,
+#         Column("id", Integer, primary_key=True),  # 0
+#         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+#         Column("owner", Integer, nullable=False),  # alexCPMHK
+#         Column("ref", String(50), nullable=False, unique=True),  # alexCPMHK
+#         Column("category", String(50), nullable=False),  # engrais
+#         Column("subcategory", String(50), nullable=False),  # engrais
+#         Column("in_category", String(50), nullable=False),  # alexCPMHK
+#         Column("in_id", Integer, nullable=False),
+#         Column("quantity_volume", Float, nullable=False),  # 0
+#         Column("quantity_unity", String(10), nullable=False),  # 0
+#         Column("construtor", String(50)),  # engrais
+#         Column("model", String(50),),  # engrais
+#         Column("comments", String(500),),  # a very beautifull crop
+#         Column("active", Integer,),  # 1
+#     )
+
+
+# ####################################################
+# # IO / BUYS / SELL / USE
+# ####################################################
+
+
+# # class ToolIO:
+# #     """A tool i"""
+
+# #     pass
+
+
+# # class InputIO:
+# #     """input buy, use and sales"""
+
+# #     pass
+
+
+# # class MachineIO:
+# #     """machine buy, use and sales"""
+
+# #     pass
+
+
+# ####################################################
+# # PROCESS / WORK / ETC
+# ####################################################
+
+
+# # class Project:
+# #     """a project is for 1 year, 1 parcel, 1 culture """
+
+# #     pass
+
+
+# # class Task:
+# #     """One task"""
+
+# #     pass
+
+
+# # class WorkContract:
+# #     """One or more Workcontract for one task but one per human """
+
+# #     pass
+
+
+# # class MachineUsage:
+# #     """One or more Rreservation for one task but one per human """
+
+# #     pass
+
+
+# ####################################################
+# # METEOROLOGIE
+# ####################################################
+
+
+# # class ParcelStation(Base):
+# #     __table__ = Table(
+# #         Params.parcelstation_tn,
+# #         Base.metadata,
+# #         Column("id", Integer, primary_key=True),  # 0
+# #         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+# #         # station
+# #         # temperature)
+# #     )
+
+# #     def as_dict(self):
+# #         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+# #     def __repr__(self):
+# #         return str(self.as_dict())
+
+
+# # class ParcelWeather(Base):
+# #     __table__ = Table(
+# #         Params.parcelweather_tn,
+# #         Base.metadata,
+# #         Column("id", Integer, primary_key=True),  # 0
+# #         Column("date", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+# #         # station_id
+# #         # temperature
+# #         # rain
+# #         # sun
+# #         # atmPressure
+# #         # wind_forece
+# #         # wind_direction
+# #     )
+
+# #     def as_dict(self):
+# #         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+
+# #     def __repr__(self):
+# #         return str(self.as_dict())
 
