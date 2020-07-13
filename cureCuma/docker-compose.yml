@@ -1,0 +1,89 @@
+version: '3.7'
+
+# networks
+networks:
+  db-net:
+  front-net:
+  back-net:
+
+# services
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./volumes/mysql/db_data:/var/lib/mysql
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+    # expose:
+    #   - 3306
+    ports:
+      - 65006:3306
+    networks:
+      - db-net
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-cont
+    # volumes:
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+      - ./.env/dev/.env.phpmyadmin.dev
+    # expose :
+    #   - 80
+    ports:
+      - 65080:80
+    networks:
+      - front-net
+      - db-net
+    depends_on:
+      - mysql
+    restart: always
+
+  back:
+    build:
+      context: ./services/back
+      dockerfile: Dockerfile
+    image: api_back:v0.0.0
+    container_name: back
+    volumes:
+      - ./services/back:/app
+    env_file:
+      - ./.env/dev/.env.mysql.dev
+      - ./.env/dev/.env.back.dev
+    networks:
+      - db-net
+      - back-net
+    # expose :
+    #   - 5042
+    ports:
+      - 65040:5040
+    depends_on:
+      - mysql
+    restart: always
+
+  # # api_back api
+  # front:
+  #   build:
+  #     context: ./services/front
+  #     dockerfile: Dockerfile
+  #   image: api_front:v0.0.0
+  #   container_name: front
+  #   volumes:
+  #     - ./services/front:/app
+  #   env_file:
+  #     - ./.env/dev/.env.back.dev
+  #     - ./.env/dev/.env.front.dev
+  #   networks:
+  #     - front-net
+  #     - back-net
+  #   # expose :
+  #   #   - 5002
+  #   ports:
+  #     - 65000:5000
+  #   depends_on:
+  #     - back
+  #   restart: always
+

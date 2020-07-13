@@ -1,0 +1,11 @@
+flask_bcrypt
+requests
+SQLAlchemy
+pymysql
+pytest
+IPython
+
+gunicorn
+python-dateutil
+
+pandas

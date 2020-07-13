@@ -1,0 +1,7 @@
+created,pseudo,email,password,category,firstname,lastname,phone,active,comments
+1999-01-01,cureCuma,curecuma@curecuma.fr,azerty,root,-,-,-,1,root / curecuma
+2000-01-01,gillesVKP,gilles@gmail.com,azerty,human,gilles,vkp,3361233213,1,1st user
+2001-01-01,cumaDuRonseau,cumaduronseau@curecuma.fr,azerty,account,-,-,-,1,1st cuma created by 1st user
+2002-01-01,pierreVKP,pierre@gmail.com,azerty,human,pierre,vkp,3361233213,1,adherent
+2003-01-01,alexandreG,alex@gmail.com,azerty,human,alexandre,gazagnes,33643004726,1,adherent
+2020-01-01,antoineG,antoine@gmail.com,azerty,human,antoine,gazagnes,33643004726,1,employee
