@@ -47,7 +47,7 @@ class User(Base):
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("email", String(50), nullable=False, unique=True),  # alex@ei.fr
         Column("password", String(50), nullable=False,),  # azerty
-        Column("category", Integer, nullable=False),  # human, account /subAccount
+        Column("category", String(20), nullable=False),  # human, account /subAccount
         Column("firstname", String(50),),  # alexandre
         Column("lastname", String(50),),  # gazagnes
         Column("phone", String(50),),  #  + 33 6 43 00 46 26
@@ -223,69 +223,69 @@ class Company(Base):
 #     pass
 
 
-# ####################################################
-# # OBJECTS
-# ####################################################
+####################################################
+# OBJECTS
+####################################################
 
 
-# class Machine(Base):
+class Machine(Base):
 
-#     __table__ = Table(
-#         Params.machines_tn,
-#         Base.metadata,
-#         Column("id", Integer, primary_key=True),  # 0
-#         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-#         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
-#         Column("user_id", Integer, nullable=False),  # alexCPMHK
-#         Column("location_id", Integer, nullable=False),  # alexCPMHK
-#         Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
-#         Column("constructor", String(50), nullable=False, default=""),  # FENT
-#         Column("model", String(50), nullable=False, default=""),  # 850
-#         Column("category", String(50), nullable=False,),  # tracteur
-#         Column("oil_capacity", Integer, nullable=False,),  # 120
-#         Column("oil", Integer, nullable=False,),  # 80
-#         Column("kms", Integer, nullable=False,),  # tracteur
-#         Column("hours", Integer, nullable=False,),  # tracteur
-#         Column("submodel", String(50),),  #
-#         Column("auth_tools", String(500),),  # tracteur
-#         Column("comments", String(500),),  # a very beautifull crop
-#         Column("active", Integer,),  # 1
-#     )
+    __table__ = Table(
+        Params.machines_tn,
+        Base.metadata,
+        Column("id", Integer, primary_key=True),  # 0
+        Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
+        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("user_id", Integer, nullable=False),  # alexCPMHK
+        Column("location_id", Integer, nullable=False),  # alexCPMHK
+        Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
+        Column("constructor", String(50), nullable=False, default=""),  # FENT
+        Column("model", String(50), nullable=False, default=""),  # 850
+        Column("category", String(50), nullable=False,),  # tracteur
+        Column("oil_capacity", Integer, nullable=False,),  # 120
+        Column("oil", Integer, nullable=False,),  # 80
+        Column("kms", Integer, nullable=False,),  # tracteur
+        Column("hours", Integer, nullable=False,),  # tracteur
+        Column("submodel", String(50),),  #
+        Column("auth_tools", String(500),),  # tracteur
+        Column("comments", String(500),),  # a very beautifull crop
+        Column("active", Integer,),  # 1
+    )
 
-#     def consume(self, oil, kms, hours):
-#         """reprsentaion of obj modification """
+    def consume(self, oil, kms, hours):
+        """reprsentaion of obj modification """
 
-#         logger.debug("called")
+        logger.debug("called")
 
-#         self.hours += hours
-#         self.kms += kms
-#         self.oil -= oil
-#         if self.oil < 0:
-#             logger.critical(f"oil of Machine id {self.id} is {self.oil}")
-#             self.oil = 0
+        self.hours += hours
+        self.kms += kms
+        self.oil -= oil
+        if self.oil < 0:
+            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+            self.oil = 0
 
-#     def partial_refuel(self, oil):
-#         """partial refuell """
+    def partial_refuel(self, oil):
+        """partial refuell """
 
-#         logger.debug("called")
+        logger.debug("called")
 
-#         self.oil += int(oil)
-#         if self.oil > self.oil_capacity:
-#             logger.critical(f"oil of Machine id {self.id} is {self.oil}")
-#             self.oil = self.oil_capacity
+        self.oil += int(oil)
+        if self.oil > self.oil_capacity:
+            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+            self.oil = self.oil_capacity
 
-#     def full_refuel(self):
-#         """reprsentaion of obj modification """
+    def full_refuel(self):
+        """reprsentaion of obj modification """
 
-#         logger.debug("called")
+        logger.debug("called")
 
-#         self.oil = self.oil_capacity
+        self.oil = self.oil_capacity
 
-#     def as_dict(self):
-#         return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
+    def as_dict(self):
+        return {k: v for k, v in self.__dict__.items() if "_sa_instance_state" not in k}
 
-#     def __repr__(self):
-#         return str(self.as_dict())
+    def __repr__(self):
+        return str(self.as_dict())
 
 
 # class Tool(Base):
