@@ -32,12 +32,17 @@ from src import logger
 ####################################################
 
 
+class _UserCategory:
+    pass
+
+
 class User(Base):
     """User
     could be 3 things
     a real user
     root aka cureCuma
-    a fake user relative to the account auto created"""
+    a fake user relative to the account auto created
+    """
 
     __table__ = Table(
         Params.users_tn,
@@ -64,11 +69,16 @@ class User(Base):
         return str(self.as_dict())
 
 
+class _MessageCategory:
+    pass
+
+
 class Message(Base):
     """just a standard message to be sent to any/some users 
     from root / curecuma to anyone
     from a user to an other
-    from a user to an account group all members in Cuma case"""
+    from a user to an account group all members in Cuma case
+    """
 
     __table__ = Table(
         Params.messages_tn,
@@ -97,6 +107,10 @@ class Message(Base):
 ####################################################
 
 
+class _LocationCategory:
+    pass
+
+
 class Location(Base):
     """any crop, constrcution land or earthpeice 
     a location is related to a real / fake user, somebody or a cuma 
@@ -114,12 +128,12 @@ class Location(Base):
         Column("adress", String(50), nullable=False),  # route de bonniere
         Column("postcode", String(5), nullable=False),  # 45230
         Column("town", String(50), nullable=False),  # Chatillon-colligny
-        Column("subtown", String(50), nullable=False),  # boniere
+        Column("subtown", String(50),),  # boniere
         Column("square", Float,),  # 10
         Column("latitude", Float,),  # 47.840
         Column("longitude", Float,),  # 2.8642
         Column("altitude", Integer,),  # 12
-        Column("subcategory", String(50),),  # ???
+        # Column("subcategory", String(50),),  # ???
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
     )
@@ -136,11 +150,20 @@ class Location(Base):
 ####################################################
 
 
+class _AccountCategory:
+    pass
+
+
+class _AccountPlan:
+    pass
+
+
 class Account(Base):
     """Account table 
     ABS class because no direct info expect plan id name
     no location for ie
-    if just for one personn user_id refer to self and cpmpany_id refter to self if cuma user_id refer to a fake user auto created and company_id shoul be created"""
+    if just for one personn user_id refer to self and cpmpany_id refter to self if cuma user_id refer to a fake user auto created and company_id shoul be created
+    """
 
     __table__ = Table(
         Params.accounts_tn,
@@ -164,7 +187,8 @@ class Account(Base):
 
 
 class AccountUser(Base):
-    """all user for one or more cuma """
+    """all user for one or more cuma
+    """
 
     __table__ = Table(
         Params.accountusers_tn,
@@ -173,11 +197,11 @@ class AccountUser(Base):
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
         Column("user_id", Integer, nullable=False),
         Column("account_id", Integer, nullable=False),
+        Column("role", String(50), nullable=False),
         Column("adherent", Integer, nullable=False),
         Column("administrator", Integer, nullable=False),  # APP ADMI
         Column("executive", Integer, nullable=False),  # APP ADMI
         Column("manager", Integer, nullable=False),  # APP ADMI
-        Column("role", String(50), nullable=False),
         Column("employee", Integer, nullable=False),
         Column("comments", String(500),),
         Column("active", Integer,),
@@ -188,6 +212,10 @@ class AccountUser(Base):
 
     def __repr__(self):
         return str(self.as_dict())
+
+
+class _CompanyJuridic:
+    pass
 
 
 class Company(Base):
@@ -228,41 +256,58 @@ class Company(Base):
 ####################################################
 
 
+class _MachineCategory:
+    pass
+
+
+class _MachineSubCategory:
+    pass
+
+
+class _MachineConstructors:
+    pass
+
+
+class _MachineModel:
+    pass
+
+
 class Machine(Base):
+    """ """
 
     __table__ = Table(
         Params.machines_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
-        Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
+        Column("name", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("user_id", Integer, nullable=False),  # alexCPMHK
         Column("location_id", Integer, nullable=False),  # alexCPMHK
         Column("plaque", String(50), nullable=False, unique=True),  # CZEH Z331
         Column("constructor", String(50), nullable=False, default=""),  # FENT
         Column("model", String(50), nullable=False, default=""),  # 850
         Column("category", String(50), nullable=False,),  # tracteur
-        Column("oil_capacity", Integer, nullable=False,),  # 120
-        Column("oil", Integer, nullable=False,),  # 80
-        Column("kms", Integer, nullable=False,),  # tracteur
-        Column("hours", Integer, nullable=False,),  # tracteur
+        Column("usage_quantity", Integer, nullable=False,),  # tracteur
+        Column("usage_unity", String(50), nullable=False,),  # tracteur
         Column("submodel", String(50),),  #
-        Column("auth_tools", String(500),),  # tracteur
+        Column("oil_capacity", Integer,),  # 120
+        Column("oil", Integer,),  # 80
+        # Column("auth_tools", String(500),),  # tracteur
         Column("comments", String(500),),  # a very beautifull crop
         Column("active", Integer,),  # 1
     )
 
-    def consume(self, oil, kms, hours):
-        """reprsentaion of obj modification """
+    # def consume(self, oil, kms, hours):
+    #     """reprsentaion of obj modification """
 
-        logger.debug("called")
+    #     logger.debug("called")
 
-        self.hours += hours
-        self.kms += kms
-        self.oil -= oil
-        if self.oil < 0:
-            logger.critical(f"oil of Machine id {self.id} is {self.oil}")
-            self.oil = 0
+    #     self.hours += hours
+    #     self.kms += kms
+    #     self.oil -= oil
+    #     if self.oil < 0:
+    #         logger.critical(f"oil of Machine id {self.id} is {self.oil}")
+    #         self.oil = 0
 
     def partial_refuel(self, oil):
         """partial refuell """
