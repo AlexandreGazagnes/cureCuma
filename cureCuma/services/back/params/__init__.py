@@ -24,8 +24,9 @@ class GeneralParams:
     machines_tn = os.getenv("MACHINE_TABLENAME", "machines")
     tools_tn = os.getenv("TOOL_TABLENAME", "tools")
     inputs_tn = os.getenv("INPUT_TABLENAME", "inputs")
+    accounts_tn = os.getenv("ACCOUNT_TABLENAME", "accounts")
     companies_tn = os.getenv("COMPANY_TABLENAME", "companies")
-    cumausers_tn = os.getenv("CUMAUSERS_TABLENAME", "cumausers")
+    accountusers_tn = os.getenv("ACCOUNTUSERS_TABLENAME", "accountusers")
 
     # database
     datadb = os.getenv("MYSQL_DATABASE", "cpmhkdb")

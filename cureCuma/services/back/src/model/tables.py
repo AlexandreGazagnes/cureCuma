@@ -167,7 +167,7 @@ class AccountUser:
     """all user for one or more cuma """
 
     __table__ = Table(
-        Params.cumausers_tn,
+        Params.accountusers_tn,
         Base.metadata,
         Column("id", Integer, primary_key=True),  # 0
         Column("created", DateTime, nullable=False,),  # 2020-01-01 00:00:00
@@ -204,6 +204,7 @@ class Company(Base):
         Column("user_id", Integer, nullable=False),  # 1
         Column("location_id", Integer, nullable=False),  # 1
         Column("siret", String(50), nullable=False),
+        Column("juridic", String(50),),
         # Column("category", String(50),),  # general
         Column("comments", String(500),),
         Column("active", Integer,),
