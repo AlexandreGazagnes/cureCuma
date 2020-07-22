@@ -20,7 +20,7 @@ logger = logging.getLogger()
 
 from src.config import ProdConfig, DevConfig
 from src.utils import setFileStruct
-from src.front import front
+from src.register import register
 
 # replace by redis in next feature
 
@@ -46,10 +46,6 @@ def create_app(config_class=DevConfig):
     # context manager
     with app.app_context():
 
-        app.register_blueprint(front)
-        # from app.back import back
+        app.register_blueprint(register)
 
-        # app.register_blueprint(back)
-        # Scss(app)
-        # Scss(app, static_dir="static/css", asset_dir="assets/scss")
         return app

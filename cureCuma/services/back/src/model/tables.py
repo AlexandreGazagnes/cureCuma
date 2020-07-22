@@ -52,7 +52,7 @@ class User(Base):
         Column("pseudo", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("email", String(50), nullable=False, unique=True),  # alex@ei.fr
         Column("password", String(50), nullable=False,),  # azerty
-        Column("category", String(20), nullable=False),  # human, account /subAccount
+        Column("category", String(20), nullable=False),  # human, account  /subAccount
         Column("firstname", String(50),),  # alexandre
         Column("lastname", String(50),),  # gazagnes
         Column("phone", String(50),),  #  + 33 6 43 00 46 26
@@ -231,7 +231,7 @@ class Company(Base):
         Column("name", String(50), nullable=False, unique=True),  # alexCPMHK
         Column("user_id", Integer, nullable=False),  # 1
         Column("location_id", Integer, nullable=False),  # 1
-        Column("siret", String(50), nullable=False),
+        Column("siret", String(50)),
         Column("juridic", String(50),),
         # Column("category", String(50),),  # general
         Column("comments", String(500),),

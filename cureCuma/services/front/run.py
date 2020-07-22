@@ -1,11 +1,22 @@
-shebang = "#! /home/alex/Env/bin/python3"
+# !/usr/bin/env python3
+# coding: utf-8
 
-from flask.cli import FlaskGroup
+import sys
+import time
 
-from src import logger
 from src import create_app
-
-# from utils.compile_scss import compile_scss
+from params import GeneralParams as Params
 
 
 app = create_app()
+
+
+def main():
+    """main funct"""
+
+    app = create_app()
+    app.run(port=Params.port, host="0.0.0.0")
+
+
+if __name__ == "__main__":
+    main()

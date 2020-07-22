@@ -64,26 +64,23 @@ services:
       - mysql
     restart: always
 
-  # # api_back api
-  # front:
-  #   build:
-  #     context: ./services/front
-  #     dockerfile: Dockerfile
-  #   image: api_front:v0.0.0
-  #   container_name: front
-  #   volumes:
-  #     - ./services/front:/app
-  #   env_file:
-  #     - ./.env/dev/.env.back.dev
-  #     - ./.env/dev/.env.front.dev
-  #   networks:
-  #     - front-net
-  #     - back-net
-  #   # expose :
-  #   #   - 5002
-  #   ports:
-  #     - 65000:5000
-  #   depends_on:
-  #     - back
-  #   restart: always
-
+  front:
+    build:
+      context: ./services/front
+      dockerfile: Dockerfile
+    image: api_front:v0.0.0
+    container_name: front
+    volumes:
+      - ./services/front:/app
+    env_file:
+      - ./.env/dev/.env.front.dev
+    networks:
+      - front-net
+      - back-net
+    # expose :
+    #   - 5000
+    ports:
+      - 65000:5000
+    depends_on:
+      - back
+    restart: always
