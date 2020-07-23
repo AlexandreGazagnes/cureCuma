@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% from "pages/register/render_field.html" import render_field %}
+<div class="container">
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Register</legend>
+                {{ render_field(form.pseudo) }}
+                {{ render_field(form.email) }}
+                {{ render_field(form.password) }}
+                {{ render_field(form.conf_password) }}
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

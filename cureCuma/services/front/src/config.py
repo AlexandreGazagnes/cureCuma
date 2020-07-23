@@ -16,25 +16,41 @@ class Config:
     """Set Flask configuration vars from .env file."""
 
     # General Config
-    SECRET_KEY = os.getenv("FRONT_SECRET_KEY", "azery")
-    FLASK_APP = os.getenv("FRONT_FLASK_APP", "front")
-    SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "cureCumaCookie")
-    STATIC_FOLDER = "static"
-    TEMPLATES_FOLDER = "templates"
+    # SECRET_KEY = os.getenv("FRONT_SECRET_KEY", "azerty")
+    # FLASK_APP = os.getenv("FRONT_FLASK_APP", "front")
+    # SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "cureCumaCookie")
+    # STATIC_FOLDER = "static"
+    # TEMPLATES_FOLDER = "templates"
 
     # Flask-Session
     # SESSION_TYPE = environ.get("SESSION_TYPE")
     # SESSION_REDIS = redis.from_url("redis://redis:6379")
     # SEND_FILE_MAX_AGE_DEFAULT = 0
 
+    pass
 
-class ProdConfig(Config):
+
+class ProdConfig():
+
+    SECRET_KEY = os.getenv("FRONT_SECRET_KEY", "azerty")
+    FLASK_APP = os.getenv("FRONT_FLASK_APP", "front")
+    SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "cureCumaCookie")
+    STATIC_FOLDER = "static"
+    TEMPLATES_FOLDER = "templates"
+
     FLASK_ENV = "production"
     DEBUG = False
     TESTING = False
 
 
-class DevConfig(Config):
+class DevConfig():
+
+    SECRET_KEY = os.getenv("FRONT_SECRET_KEY", "azerty")
+    FLASK_APP = os.getenv("FRONT_FLASK_APP", "front")
+    SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "cureCumaCookie")
+    STATIC_FOLDER = "static"
+    TEMPLATES_FOLDER = "templates"
+
     FLASK_ENV = "development"
     DEBUG = True
     TESTING = True

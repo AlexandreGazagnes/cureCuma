@@ -19,8 +19,12 @@ flask-wtf
 Flask-Scss
 flask-session
 flask-login
+Flask-Mail
+email_validator
 gunicorn
 requests
+
+
 # selenium
 
 # DB
